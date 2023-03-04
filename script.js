@@ -9,17 +9,22 @@ let positionStart = [0,0]
 
     // exclude the move that takes us back to position
 
-    // make sure it is a legal move (within the field)
-    // if(chessBoard.includes(move1)){
-    //     if(position === goal){
-    //         // we have reached our goal
-    //         return tree // how??
+// each position is a node on a graph
+// with a value (coordinate) and maximum 8 next Nodes (next moves from there)
+
+function createGraph(position, goal){
+    let possibleNextPositions = calculateNextPositions(position)
+
+    //    if(position === goal){
+    //      we have reached our goal
+    //          return tree // how??
     //     }
     //     else{
     //         // keep going further
     //         calculateMoveTree(move1, goal)
     //     }
-    // }
+}
+
 
 function calculateNextPositions(position){
     // x-axis moves: 2,1 2,-1 -2,1 -2,-1
