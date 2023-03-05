@@ -1,31 +1,36 @@
 const chessBoard = [[0,1,2,3,4,5,6,7,8],[0,1,2,3,4,5,6,7,8]]
 // ([x-axis],[y-axis])
 
-let positionKnight = [1,2]
+let positionGoal = [0,4]
 let positionStart = [0,0]
 
 // we need a breadth first algorithm
-// this makes sure we check the closest fields first
+// this makes sure we check the closest 
 
-    // exclude the move that takes us back to position
+createGraph(positionStart, positionGoal)
 
-// each position is a node on a graph
-// with a value (coordinate) and maximum 8 next Nodes (next moves from there)
-
-function createGraph(position, goal){
-    let possibleNextPositions = calculateNextPositions(position)
-
-    //    if(position === goal){
-    //      we have reached our goal
-    //          return tree // how??
-    //     }
-    //     else{
-    //         // keep going further
-    //         calculateMoveTree(move1, goal)
-    //     }
+function createGraph(node, goal){
+    let visitedQueue = []
+    let queue = []
+    //visitedQueue.push(node)
+    queue.push(node)
+    while(queue.length>0){
+        // remove first item of array
+        let removedItem = queue.shift()
+        visitedQueue.push(removedItem)
+        if(removedItem[0] === goal[0] && removedItem[1] === goal[1]){
+            console.log(visitedQueue)
+            return
+        }
+        let neighbors = calculateNextPositions(removedItem)
+        neighbors.forEach(position => {
+            // make sure that position has not been visited before
+            if(!visitedQueue.includes(position)){
+                queue.push(position)
+            }
+        });
+    }
 }
-
-
 function calculateNextPositions(position){
     // x-axis moves: 2,1 2,-1 -2,1 -2,-1
     // y-axis moves: 1,2 1,-2 -1,2 -1,-2
@@ -44,5 +49,3 @@ function calculateNextPositions(position){
     });
     return possiblePositions
 }
-
-calculateNextPositions([0,0], [1,2])
