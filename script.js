@@ -1,13 +1,19 @@
 const chessBoard = [[0,1,2,3,4,5,6,7],[0,1,2,3,4,5,6,7]]
 // ([x-axis],[y-axis])
 
-let positionGoal = [3,7]
+let positionGoal = [2,1]
 let positionStart = [0,0]
 
 // we need a breadth first algorithm
 // this makes sure we check the closest 
 
-createGraph(positionStart, positionGoal)
+
+let madeMoves = createGraph(positionStart, positionGoal)
+console.log(madeMoves)
+    madeMoves.forEach((move, index) => {
+        setTimeout(() => animateKnightsMovement(move), (index+1)*2000)
+    });
+    
 
 function createGraph(node, goal){
     let visitedQueue = []
@@ -19,8 +25,8 @@ function createGraph(node, goal){
         let removedItem = queue.shift()
         visitedQueue.push(removedItem)
         if(removedItem[0] === goal[0] && removedItem[1] === goal[1]){
-            console.log(visitedQueue)
-            return
+            return visitedQueue
+            
         }
         let neighbors = calculateNextPositions(removedItem)
         neighbors.forEach(position => {
@@ -52,7 +58,7 @@ function calculateNextPositions(position){
 
 function animateKnightsMovement(position){
 
-    //clear the previous knight position
+    // clear the previous knight position
     let previousKnight = document.querySelector("#knight")
     if(previousKnight){
         previousKnight.remove()
@@ -76,6 +82,3 @@ let goalGridItem = document.querySelector(`#f${gridId}`)
     knightImage.id = "knight"
     goalGridItem.append(knightImage)
 }
-
-let testArray = [1,1]
-animateKnightsMovement(testArray)
