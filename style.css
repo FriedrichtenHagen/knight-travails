@@ -21,6 +21,9 @@ body{
 }
 .field{
     border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .field:nth-child(-2n+8), 
 .field:nth-child(8) ~ :nth-child(-2n+15), 

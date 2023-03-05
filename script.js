@@ -52,6 +52,15 @@ function calculateNextPositions(position){
 
 function animateKnightsMovement(position){
 
+    //clear the previous knight position
+    let previousKnight = document.querySelector("#knight")
+    if(previousKnight){
+        previousKnight.remove()
+    }
+
+    // animate the transition
+
+
     let x = position[0]
     let y = position[1]
     
