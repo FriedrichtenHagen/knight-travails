@@ -1,0 +1,37 @@
+:root{
+    height: 100%;
+    width: 100%;
+}
+body{
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.chessboard{
+    width: 500px;
+    height: 500px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    border: 1px solid black;
+}
+.field{
+    border: 1px solid black;
+}
+.field:nth-child(-2n+8), 
+.field:nth-child(8) ~ :nth-child(-2n+15), 
+.field:nth-child(16) ~ .field:nth-child(-2n+24),
+.field:nth-child(24) ~ .field:nth-child(-2n+31),
+.field:nth-child(32) ~ .field:nth-child(-2n+40),
+.field:nth-child(40) ~ .field:nth-child(-2n+47),
+.field:nth-child(48) ~ .field:nth-child(-2n+56),
+.field:nth-child(56) ~ .field:nth-child(-2n+63) {
+    background-color: #5b5a5a;
+}
+#knight{
+    height: 60px;
+}
