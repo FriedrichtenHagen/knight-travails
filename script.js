@@ -1,8 +1,8 @@
 const chessBoard = [[0,1,2,3,4,5,6,7],[0,1,2,3,4,5,6,7]]
 // ([x-axis],[y-axis])
 
-let positionGoal = [7,6]
-let positionStart = [0,0]
+let positionGoal = [5,4]
+let positionStart = [1,1]
 
 // we need a breadth first algorithm
 // this makes sure we check the closest 
@@ -115,8 +115,9 @@ let goalGridItem = document.querySelector(`#f${gridId}`)
 function pathToArray(endNode){
     let pathArray = []
     while(endNode.previous){
-        pathArray.push(endNode.position)
+        pathArray.unshift(endNode.position)
         endNode = endNode.previous
     }
+    pathArray.unshift(endNode.position)
     return pathArray
 }
