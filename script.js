@@ -10,33 +10,57 @@ let positionStart = [0,0]
 
 let madeMoves = createGraph(positionStart, positionGoal)
 console.log(madeMoves)
-    madeMoves.forEach((move, index) => {
+madeMoves.forEach((move, index) => {
         setTimeout(() => animateKnightsMovement(move), (index+1)*2000)
-    });
+});
     
 
-function createGraph(node, goal){
+// create a node factory function
+function createNode(position){
+    return {
+        position: position,
+    }
+}
+function createGraph(start, goal){
     let visitedQueue = []
     let queue = []
-    //visitedQueue.push(node)
-    queue.push(node)
+    let root = createNode(start)
+    visitedQueue.push(root.position)
+
+    // adding nodes to queue does not make sense
+    queue.push(root)
+
+    // start the loop
     while(queue.length>0){
         // remove first item of array
-        let removedItem = queue.shift()
-        visitedQueue.push(removedItem)
-        if(removedItem[0] === goal[0] && removedItem[1] === goal[1]){
-            return visitedQueue
-            
+        let removedNode = queue.shift()
+
+        visitedQueue.push(removedNode.position)
+        if(removedNode.position[0] === goal[0] && removedNode.position[1] === goal[1]){
+            return root
+            // return route in graph from root to this position
+            // maybe run a search on the created graph 
+            // turn that path into an array (to be animated)  
         }
-        let neighbors = calculateNextPositions(removedItem)
-        neighbors.forEach(position => {
+        let neighbors = calculateNextPositions(removedNode.position)
+        neighbors.forEach((neighpos, index) => {
             // make sure that position has not been visited before
-            if(!visitedQueue.includes(position)){
-                queue.push(position)
+            if(!visitedQueue.includes(neighpos)){
+                // create a new (next) node
+                let nextNode = createNode(neighpos)
+                // set the node.position
+                nextNode.position = neighpos
+                // push node to queue
+                queue.push(nextNode)
+                // add that position to the graph as next (of removedItem)
+                let key = `next${index}`
+                removedNode[key] = nextNode
             }
         });
     }
 }
+// write a find function that returns the graph up to that point
+
 function calculateNextPositions(position){
     // x-axis moves: 2,1 2,-1 -2,1 -2,-1
     // y-axis moves: 1,2 1,-2 -1,2 -1,-2
@@ -82,3 +106,6 @@ let goalGridItem = document.querySelector(`#f${gridId}`)
     knightImage.id = "knight"
     goalGridItem.append(knightImage)
 }
+
+
+// add the find function that delivers the path from too to goal
