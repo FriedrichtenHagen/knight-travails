@@ -121,3 +121,6 @@ function pathToArray(endNode){
     pathArray.unshift(endNode.position)
     return pathArray
 }
+
+// function that allows input of start and end field
+// maybe hightlight the start and end point
