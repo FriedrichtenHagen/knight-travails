@@ -1,7 +1,7 @@
 const chessBoard = [[0,1,2,3,4,5,6,7],[0,1,2,3,4,5,6,7]]
 // ([x-axis],[y-axis])
 
-let positionGoal = [2,1]
+let positionGoal = [7,6]
 let positionStart = [0,0]
 
 // we need a breadth first algorithm
@@ -11,7 +11,7 @@ let positionStart = [0,0]
 let madeMoves = createGraph(positionStart, positionGoal)
 console.log(madeMoves)
 madeMoves.forEach((move, index) => {
-        setTimeout(() => animateKnightsMovement(move), (index+1)*2000)
+         setTimeout(() => animateKnightsMovement(move), (index+1)*2000)
 });
     
 
@@ -37,7 +37,8 @@ function createGraph(start, goal){
 
         visitedQueue.push(removedNode.position)
         if(removedNode.position[0] === goal[0] && removedNode.position[1] === goal[1]){
-            return root
+            
+            return pathToArray(removedNode)
             // return route in graph from root to this position
             // maybe run a search on the created graph 
             // turn that path into an array (to be animated)  
@@ -50,6 +51,7 @@ function createGraph(start, goal){
                 let nextNode = createNode(neighpos)
                 // set the node.position
                 nextNode.position = neighpos
+                nextNode.previous = removedNode
                 // push node to queue
                 queue.push(nextNode)
                 // add that position to the graph as next (of removedItem)
@@ -108,4 +110,13 @@ let goalGridItem = document.querySelector(`#f${gridId}`)
 }
 
 
-// add the find function that delivers the path from too to goal
+// add the find function that delivers the path from root to goal
+
+function pathToArray(endNode){
+    let pathArray = []
+    while(endNode.previous){
+        pathArray.push(endNode.position)
+        endNode = endNode.previous
+    }
+    return pathArray
+}
