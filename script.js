@@ -87,18 +87,16 @@ function animateKnightsMovement(position){
         previousKnight.remove()
     }
 
-    // animate the transition
-
-
     let x = position[0]
     let y = position[1]
     
-    let gridId = x + 64-(y*8)-7
+//    let gridId = x + 64-(y*8)-7
 // equation for grid id: x + 64-(y*8)-7
 // 0 + 64-(0*8)-7 = 57
 // 1 + 64-(1*8)-7 = 50
 // 2 + 64-(2*8)-7 = 43
-let goalGridItem = document.querySelector(`#f${gridId}`) 
+// let goalGridItem = document.querySelector(`#f${gridId}`) 
+let goalGridItem = document.querySelector(`[data-column="${x}"][data-row="${y}"]`)
 
     let knightImage = document.createElement("img")
     knightImage.src = "chess.png"
@@ -133,19 +131,20 @@ function removeStartEventListeners(){
     });
 }
 
-
+// save the start point
 function setStartPoint(){
-    // save the start point
-    console.log(this)
-
-    let xAxis = this.dataset.column
-    let yAxis = this.dataset.row
-
+    // read the column and row data
+    let xAxis = parseInt(this.dataset.column)
+    let yAxis = parseInt(this.dataset.row)
     positionStart = [xAxis, yAxis]
     console.log(positionStart)
     // add styling
     this.classList.add("startPoint")
     // remove the start point eventlisteners
-    //removeStartEventListeners()
+    removeStartEventListeners()
 
+    knightTravails(positionStart, [5,5])
 }
+
+// add animation
+// rewrite without using id for coordinates
