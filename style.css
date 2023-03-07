@@ -12,8 +12,9 @@ body{
     align-items: center;
 }
 .chessboard{
-    width: 500px;
-    height: 500px;
+    aspect-ratio : 1 / 1;
+    width: 100vw;
+    max-width: 500px;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
@@ -37,7 +38,8 @@ body{
     background-color: #5b5a5a;
 }
 #knight{
-    height: 60px;
+    height: calc(100vw/9);
+    max-height: 55px;
 }
 #startPoint{
     background-color: red;
