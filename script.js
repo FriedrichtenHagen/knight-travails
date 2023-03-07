@@ -1,4 +1,4 @@
-const chessBoard = [[0,1,2,3,4,5,6,7],[0,1,2,3,4,5,6,7]]
+const chessBoard = [[1,2,3,4,5,6,7,8],[1,2,3,4,5,6,7,8]]
 // ([x-axis],[y-axis])
 
 let positionGoal = []
@@ -114,8 +114,7 @@ function pathToArray(endNode){
     return pathArray
 }
 
-// maybe hightlight the start and end point
-// add eventlistener for start and end
+// add eventlistener for start
 function addStartEventListeners(){
     let fields = document.querySelectorAll(".field")
     fields.forEach(field => {
@@ -130,6 +129,21 @@ function removeStartEventListeners(){
         field.removeEventListener("click", setStartPoint)
     });
 }
+// add eventlistener for end
+function addEndEventListeners(){
+    let fields = document.querySelectorAll(".field")
+    fields.forEach(field => {
+        field.addEventListener("click", setEndPoint)
+    });
+}
+
+// remove the start point eventlisteners
+function removeEndEventListeners(){
+    let fields = document.querySelectorAll(".field")
+    fields.forEach(field => {
+        field.removeEventListener("click", setEndPoint)
+    });
+}
 
 // save the start point
 function setStartPoint(){
@@ -139,12 +153,27 @@ function setStartPoint(){
     positionStart = [xAxis, yAxis]
     console.log(positionStart)
     // add styling
-    this.classList.add("startPoint")
+    this.setAttribute("id","startPoint")
     // remove the start point eventlisteners
     removeStartEventListeners()
 
-    knightTravails(positionStart, [5,5])
+    // set the end point
+    addEndEventListeners()
+}
+// save the end point
+function setEndPoint(){
+    // read the column and row data
+    let xAxis = parseInt(this.dataset.column)
+    let yAxis = parseInt(this.dataset.row)
+    positionGoal = [xAxis, yAxis]
+    console.log(positionGoal)
+    // add styling
+    this.setAttribute("id","endPoint")
+    // remove the start point eventlisteners
+    removeStartEventListeners()
+
+    knightTravails(positionStart, positionGoal)
 }
 
 // add animation
-// rewrite without using id for coordinates
+// rewrite the chessboard array to go from 1-8

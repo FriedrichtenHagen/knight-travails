@@ -39,6 +39,9 @@ body{
 #knight{
     height: 60px;
 }
-.chessboard>.startPoint{
+#startPoint{
+    background-color: red;
+}
+#endPoint{
     background-color: red;
 }
