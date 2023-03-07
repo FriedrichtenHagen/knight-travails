@@ -137,30 +137,12 @@ function removeStartEventListeners(){
 function setStartPoint(){
     // save the start point
     console.log(this)
-    let cssId = this.id
-    // extract only the number
-    let id = cssId.substring(1);
-    console.log(id)
-    // calculate the grid position
-    let xAxis = id%8-1
-    let yAxis = id/8
-    let calculatedPosition = [xAxis, yAxis]
-    console.log(calculatedPosition)
-    //let gridId = x + 64-(y*8)-7
-    // g = x -8y + 57
-    // x = g + 8y - 57
-    //     y = (-g + x + 57)/8
-    // y = -1/8g + 1/8x + 57/8
-  
-// equation for grid id: x + 64-(y*8)-7
-// 0 + 64-(0*8)-7 = 57
-// 1 + 64-(1*8)-7 = 50
-// 2 + 64-(2*8)-7 = 43
 
+    let xAxis = this.dataset.column
+    let yAxis = this.dataset.row
 
-
-    // positionStart = []
-
+    positionStart = [xAxis, yAxis]
+    console.log(positionStart)
     // add styling
     this.classList.add("startPoint")
     // remove the start point eventlisteners
