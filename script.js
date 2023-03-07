@@ -1,26 +1,24 @@
 const chessBoard = [[0,1,2,3,4,5,6,7],[0,1,2,3,4,5,6,7]]
 // ([x-axis],[y-axis])
 
-let positionGoal = [5,4]
-let positionStart = [1,1]
+let positionGoal = []
+let positionStart = [] 
 
-// we need a breadth first algorithm
-// this makes sure we check the closest 
-
-
-let madeMoves = createGraph(positionStart, positionGoal)
-console.log(madeMoves)
-madeMoves.forEach((move, index) => {
-         setTimeout(() => animateKnightsMovement(move), (index+1)*2000)
-});
-    
-
-// create a node factory function
+// driver function that allows input of start and end field
+function knightTravails(start, goal){
+    let madeMoves = createGraph(start, goal)
+    console.log(madeMoves)
+    madeMoves.forEach((move, index) => {
+             setTimeout(() => animateKnightsMovement(move), (index+1)*2000)
+    });
+}
+// a node factory function
 function createNode(position){
     return {
         position: position,
     }
 }
+// breadth first search
 function createGraph(start, goal){
     let visitedQueue = []
     let queue = []
@@ -61,8 +59,7 @@ function createGraph(start, goal){
         });
     }
 }
-// write a find function that returns the graph up to that point
-
+// calculate the neighbors of a position
 function calculateNextPositions(position){
     // x-axis moves: 2,1 2,-1 -2,1 -2,-1
     // y-axis moves: 1,2 1,-2 -1,2 -1,-2
@@ -81,7 +78,7 @@ function calculateNextPositions(position){
     });
     return possiblePositions
 }
-
+// animate the knight image
 function animateKnightsMovement(position){
 
     // clear the previous knight position
@@ -108,10 +105,7 @@ let goalGridItem = document.querySelector(`#f${gridId}`)
     knightImage.id = "knight"
     goalGridItem.append(knightImage)
 }
-
-
-// add the find function that delivers the path from root to goal
-
+// return the path from root of graph to goal position as an array
 function pathToArray(endNode){
     let pathArray = []
     while(endNode.previous){
@@ -122,5 +116,54 @@ function pathToArray(endNode){
     return pathArray
 }
 
-// function that allows input of start and end field
 // maybe hightlight the start and end point
+// add eventlistener for start and end
+function addStartEventListeners(){
+    let fields = document.querySelectorAll(".field")
+    fields.forEach(field => {
+        field.addEventListener("click", setStartPoint)
+    });
+}
+addStartEventListeners()
+// remove the start point eventlisteners
+function removeStartEventListeners(){
+    let fields = document.querySelectorAll(".field")
+    fields.forEach(field => {
+        field.removeEventListener("click", setStartPoint)
+    });
+}
+
+
+function setStartPoint(){
+    // save the start point
+    console.log(this)
+    let cssId = this.id
+    // extract only the number
+    let id = cssId.substring(1);
+    console.log(id)
+    // calculate the grid position
+    let xAxis = id%8-1
+    let yAxis = id/8
+    let calculatedPosition = [xAxis, yAxis]
+    console.log(calculatedPosition)
+    //let gridId = x + 64-(y*8)-7
+    // g = x -8y + 57
+    // x = g + 8y - 57
+    //     y = (-g + x + 57)/8
+    // y = -1/8g + 1/8x + 57/8
+  
+// equation for grid id: x + 64-(y*8)-7
+// 0 + 64-(0*8)-7 = 57
+// 1 + 64-(1*8)-7 = 50
+// 2 + 64-(2*8)-7 = 43
+
+
+
+    // positionStart = []
+
+    // add styling
+    this.classList.add("startPoint")
+    // remove the start point eventlisteners
+    //removeStartEventListeners()
+
+}

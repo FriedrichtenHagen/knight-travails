@@ -24,6 +24,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 .field:nth-child(-2n+8), 
 .field:nth-child(8) ~ :nth-child(-2n+15), 
@@ -37,4 +38,7 @@ body{
 }
 #knight{
     height: 60px;
+}
+.chessboard>.startPoint{
+    background-color: red;
 }
