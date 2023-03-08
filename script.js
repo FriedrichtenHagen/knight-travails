@@ -9,7 +9,7 @@ function knightTravails(start, goal){
     let madeMoves = createGraph(start, goal)
     console.log(madeMoves)
     madeMoves.forEach((move, index) => {
-             setTimeout(() => animateKnightsMovement(move), (index+1)*2000)
+             setTimeout(() => animateKnightsMovement(move), (index+1)*1000)
     });
 }
 // a node factory function
@@ -80,7 +80,6 @@ function calculateNextPositions(position){
 }
 // animate the knight image
 function animateKnightsMovement(position){
-
     // clear the previous knight position
     let previousKnight = document.querySelector("#knight")
     if(previousKnight){
@@ -89,14 +88,8 @@ function animateKnightsMovement(position){
 
     let x = position[0]
     let y = position[1]
-    
-//    let gridId = x + 64-(y*8)-7
-// equation for grid id: x + 64-(y*8)-7
-// 0 + 64-(0*8)-7 = 57
-// 1 + 64-(1*8)-7 = 50
-// 2 + 64-(2*8)-7 = 43
-// let goalGridItem = document.querySelector(`#f${gridId}`) 
-let goalGridItem = document.querySelector(`[data-column="${x}"][data-row="${y}"]`)
+
+    let goalGridItem = document.querySelector(`[data-column="${x}"][data-row="${y}"]`)
 
     let knightImage = document.createElement("img")
     knightImage.src = "chess.png"
@@ -118,8 +111,8 @@ function pathToArray(endNode){
 function addStartEventListeners(){
     let fields = document.querySelectorAll(".field")
     fields.forEach(field => {
-        field.addEventListener("click", setStartPoint)
-    });
+        field.addEventListener("click", setStartPoint);
+    })
 }
 addStartEventListeners()
 // remove the start point eventlisteners
@@ -136,7 +129,6 @@ function addEndEventListeners(){
         field.addEventListener("click", setEndPoint)
     });
 }
-
 // remove the start point eventlisteners
 function removeEndEventListeners(){
     let fields = document.querySelectorAll(".field")
@@ -144,7 +136,6 @@ function removeEndEventListeners(){
         field.removeEventListener("click", setEndPoint)
     });
 }
-
 // save the start point
 function setStartPoint(){
     // read the column and row data
@@ -154,6 +145,7 @@ function setStartPoint(){
     console.log(positionStart)
     // add styling
     this.setAttribute("id","startPoint")
+    this.textContent = "Start"
     // remove the start point eventlisteners
     removeStartEventListeners()
 
@@ -169,11 +161,18 @@ function setEndPoint(){
     console.log(positionGoal)
     // add styling
     this.setAttribute("id","endPoint")
+    this.textContent = "End"
     // remove the start point eventlisteners
-    removeStartEventListeners()
+    removeEndEventListeners()
 
     knightTravails(positionStart, positionGoal)
 }
 
+function removeStartandEnd(){
+    const startPoint = document.querySelector("#startPoint")
+    startPoint.textContent = ""
+
+}
 // add animation
-// rewrite the chessboard array to go from 1-8
+// work on start and end text overlapping with knight
+// allow the game to continue after reaching an end point

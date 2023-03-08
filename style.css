@@ -8,8 +8,12 @@ body{
     margin: 0px;
     padding: 0px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.explanation{
+    padding: 5px;
 }
 .chessboard{
     aspect-ratio : 1 / 1;
@@ -40,10 +44,11 @@ body{
 #knight{
     height: calc(100vw/9);
     max-height: 55px;
+    position: absolute;
 }
 #startPoint{
-    background-color: red;
+
 }
 #endPoint{
-    background-color: red;
+
 }
