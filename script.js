@@ -5,11 +5,11 @@ let positionGoal = []
 let positionStart = [] 
 
 // driver function that allows input of start and end field
-function knightTravails(start, goal){
+async function knightTravails(start, goal){
     let madeMoves = createGraph(start, goal)
     console.log(madeMoves)
     madeMoves.forEach((move, index) => {
-             setTimeout(() => animateKnightsMovement(move), (index+1)*1000)
+        setTimeout(() => animateKnightsMovement(move), (index+1)*1000)
     });
 }
 // a node factory function
@@ -145,7 +145,12 @@ function setStartPoint(){
     console.log(positionStart)
     // add styling
     this.setAttribute("id","startPoint")
-    this.textContent = "Start"
+
+    // create textfield
+    const textField = document.createElement("div")
+    textField.setAttribute("id", "startText")
+    textField.textContent = "Start"
+    this.append(textField)
     // remove the start point eventlisteners
     removeStartEventListeners()
 
@@ -161,16 +166,23 @@ function setEndPoint(){
     console.log(positionGoal)
     // add styling
     this.setAttribute("id","endPoint")
-    this.textContent = "End"
+
+    // create textfield
+    const textField = document.createElement("div")
+    textField.setAttribute("id", "endText")
+    textField.textContent = "End"
+    this.append(textField)
     // remove the start point eventlisteners
     removeEndEventListeners()
 
     knightTravails(positionStart, positionGoal)
 }
 
-function removeStartandEnd(){
-    const startPoint = document.querySelector("#startPoint")
+function removeStartandEndText(){
+    const startPoint = document.querySelector("#startText")
     startPoint.textContent = ""
+    const endPoint = document.querySelector("#endText")
+    endPoint.textContent = ""
 
 }
 // add animation
