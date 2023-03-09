@@ -8,20 +8,16 @@ let positionStart = []
 function knightTravails(start, goal){
     let madeMoves = createGraph(start, goal)
     console.log(madeMoves)
-    timeKnightMovements(madeMoves)
 
-    //then(removeStartandEndText())
-
-
-    // wait for the knight to have reached the goal
-    // removeStartandEndText()
-}
-async function timeKnightMovements(madeMoves){
     madeMoves.forEach((move, index) => {
-    setTimeout(() => animateKnightsMovement(move), (index+1)*1000)
+        setTimeout(() => animateKnightsMovement(move), (index+1)*1000)
     })
     setTimeout(() => removeStartandEndText(), (madeMoves.length)*1000)
-
+    
+    // set current position as start
+    positionStart = goal
+    // allow the game to start over from the current position
+    addEndEventListeners()
 }
 
 
@@ -193,12 +189,12 @@ function setEndPoint(){
 }
 
 function removeStartandEndText(){
-    const startPoint = document.querySelector("#startText")
+    let startPoint = document.querySelector("#startText")
     startPoint.textContent = ""
-    const endPoint = document.querySelector("#endText")
+    let endPoint = document.querySelector("#endText")
     endPoint.textContent = ""
 
 }
 // add animation
-// work on start and end text overlapping with knight
-// allow the game to continue after reaching an end point
+// there seems to be a bug with removing the end text after the first run
+// the ids for start and end are not updated
