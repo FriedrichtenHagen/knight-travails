@@ -5,13 +5,28 @@ let positionGoal = []
 let positionStart = [] 
 
 // driver function that allows input of start and end field
-async function knightTravails(start, goal){
+function knightTravails(start, goal){
     let madeMoves = createGraph(start, goal)
     console.log(madeMoves)
-    madeMoves.forEach((move, index) => {
-        setTimeout(() => animateKnightsMovement(move), (index+1)*1000)
-    });
+    timeKnightMovements(madeMoves)
+
+    //then(removeStartandEndText())
+
+
+    // wait for the knight to have reached the goal
+    // removeStartandEndText()
 }
+async function timeKnightMovements(madeMoves){
+    let result = await Promise.all([
+        madeMoves.forEach((move, index) => {
+        setTimeout(() => animateKnightsMovement(move), (index+1)*1000)
+        })
+    ])
+    console.log(result)
+}
+
+
+
 // a node factory function
 function createNode(position){
     return {
