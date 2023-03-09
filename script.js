@@ -17,12 +17,11 @@ function knightTravails(start, goal){
     // removeStartandEndText()
 }
 async function timeKnightMovements(madeMoves){
-    let result = await Promise.all([
-        madeMoves.forEach((move, index) => {
-        setTimeout(() => animateKnightsMovement(move), (index+1)*1000)
-        })
-    ])
-    console.log(result)
+    madeMoves.forEach((move, index) => {
+    setTimeout(() => animateKnightsMovement(move), (index+1)*1000)
+    })
+    setTimeout(() => removeStartandEndText(), (madeMoves.length)*1000)
+
 }
 
 
