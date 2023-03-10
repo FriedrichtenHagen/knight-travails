@@ -4,7 +4,7 @@ The knight takes a shortest path between two points on a chess board.
 
 Here is a link to a live demo: https://friedrichtenhagen.github.io/knight-travails/
 
-![game screenshot](/chess-board-screenshot.png)
+![game screenshot](/chessboard-screenshot.png)
 
 ## How it's made:
 
