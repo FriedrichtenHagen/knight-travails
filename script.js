@@ -192,8 +192,9 @@ function removeStartandEndText(){
     let startPoint = document.querySelector("#startText")
     startPoint.textContent = ""
     let endPoint = document.querySelector("#endText")
-    endPoint.textContent = ""
-
+    //endPoint.textContent = ""
+    // also remove the endPoint id
+    endPoint.remove()
 }
 // add animation
 // there seems to be a bug with removing the end text after the first run
