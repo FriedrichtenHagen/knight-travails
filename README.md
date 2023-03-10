@@ -16,7 +16,7 @@ A graph is created that begins with the start point as the root node.
 Each legal (contained within the 64 fields of the board) and not previously visited (this would result in endless loops) neighboring field is evaluated to see if it is the goal field. 
 If this first level of moves does not result in our goal, we then continue with the neighbors of each of those nodes. 
 This is repeated until we reach the goal node.
-Since we are traversing the graph using a breadth-first approach the resulting path between the root node an our first time reaching the goal must be a shortest path (minimum amount of moves).
+Since we are traversing the graph using a breadth-first approach the first path between the root node and goal must be a shortest path (minimum amount of moves).
 
 
 ## Lessons learned:
